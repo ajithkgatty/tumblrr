@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+	before_action :authenticate_user!, except: [:index, :show]
 	before_action :get_post, except: [:index, :create, :new ]
 
 	def index
