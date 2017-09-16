@@ -4,9 +4,9 @@
     <title>Tumblrr</title>
     <%= csrf_meta_tags %>
 
-    <%#= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag    'application', 'https://fonts.googleapis.com/css?family=Raleway:400,700' %>
-    <%#= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%#= favicon_link_tag 'favicon.ico' %>
   </head>
 
@@ -15,15 +15,22 @@
   		<ul>
   			<li class="category"> <%= link_to "Tumblr", root_path %> </li>
   			<li> <%= link_to "Posts", root_path %></li>
-  			<li> About	</li>
+  			<li> <%= link_to "About", about_path %></li>
   		</ul>
   		<p class="sign_in"> User login </p>
   	</div>
 
   	<div id="main_content">
   		<div id="header">
-  			<p> Post feed </p>
-  			<div class="button">
+        <% if current_page?(root_path) %>
+  			   <p> Post feed </p>
+        <% elsif current_page?(about_path) %>
+            <p> My Site </p>
+        <% else %>
+            <% link_to "Back to post feed", root_path %>
+        <% end %>
+          
+  			<div style="float: right"> 
   				<!-- <button class="button"> -->
            <%= link_to "Make Post", new_post_path, class: "button" %> 
          <!-- </button> -->
